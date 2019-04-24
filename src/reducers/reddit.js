@@ -1,15 +1,17 @@
 import Immutable from 'seamless-immutable';
 
 const initialState = Immutable({
-  topPosts: []
+  posts: [],
+  activePost: [],
+  readPosts: []
 });
 
-const reddit = (state = initialState, action = {}) => {
+const reddit = (state = initialState, action) => {
   switch (action.type) {
     case 'LOAD_POSTS':
       return {
         ...state,
-        topPosts: action.topPosts
+        posts: action.posts
       };
     case 'DISMISS_POST':
       return {
@@ -19,13 +21,15 @@ const reddit = (state = initialState, action = {}) => {
       return {
         ...state
       };
+    case 'ACTIVE_POST':
+      return {
+        ...state,
+        activePost: action.post,
+        readPosts: [...state.readPosts, action.post.id]
+     }
     default:
       return state;
   }
 };
-
-export function getTopPosts(state) {
-  return state.reddit.topPosts;
-}
 
 export default reddit;

@@ -10,7 +10,7 @@ class RedditService {
     const children = data.data.children;
 
     return children.map(post => {
-      return post
+      return post.data
     });
   }
 }
