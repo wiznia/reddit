@@ -1,7 +1,7 @@
 import React from 'react';
 import '../App.scss';
 import { connect } from 'react-redux';
-import { fetchPosts, loadActivePost, dismissPost } from '../actions/index';
+import { fetchPosts, loadActivePost, dismissPost, dismissPosts } from '../actions/index';
 import Post from './Post';
 import Moment from 'react-moment';
 
@@ -28,6 +28,12 @@ class App extends React.Component {
     }
   }
 
+  dismissPosts = () => {
+    setTimeout(() => {
+      this.props.dispatch(dismissPosts());
+    }, 1000);
+  }
+
   render() {
     const { posts, activePost, readPosts } = this.props;
 
@@ -51,6 +57,7 @@ class App extends React.Component {
           })
         }
         <Post post={activePost} />
+        <button onClick={() => this.dismissPosts()}>Dismiss All</button>
       </React.Fragment>
     )
   }

@@ -10,6 +10,10 @@ export const dismissPost = postId => ({
   postId
 });
 
+export const dismissPosts = () => ({
+  type: 'DISMISS_POSTS'
+});
+
 export function fetchPosts() {
   return async(dispatch, getState) => {
     try {

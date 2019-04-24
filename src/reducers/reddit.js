@@ -21,7 +21,8 @@ const reddit = (state = initialState, action) => {
       };
     case 'DISMISS_POSTS':
       return {
-        ...state
+        ...state,
+        dismissedPosts: state.posts.map(post => post.id)
       };
     case 'ACTIVE_POST':
       return {
