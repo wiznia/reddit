@@ -3,7 +3,8 @@ import Immutable from 'seamless-immutable';
 const initialState = Immutable({
   posts: [],
   activePost: [],
-  readPosts: []
+  readPosts: [],
+  dismissedPosts: []
 });
 
 const reddit = (state = initialState, action) => {
@@ -15,7 +16,8 @@ const reddit = (state = initialState, action) => {
       };
     case 'DISMISS_POST':
       return {
-        ...state
+        ...state,
+        dismissedPosts: [...state.dismissedPosts, action.postId]
       };
     case 'DISMISS_POSTS':
       return {

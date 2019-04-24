@@ -3,7 +3,12 @@ import redditService from '../services/reddit';
 export const loadActivePost = post => ({
   type: 'ACTIVE_POST',
   post
-})
+});
+
+export const dismissPost = postId => ({
+  type: 'DISMISS_POST',
+  postId
+});
 
 export function fetchPosts() {
   return async(dispatch, getState) => {
