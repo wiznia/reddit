@@ -1,0 +1,181 @@
+:root {
+  --main-text-color: #ca7a06;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: normal;
+}
+
+#root {
+  display: flex;
+}
+
+.posts {
+  background-color: #000;
+  color: #fff;
+  width: 18.75rem;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-100%);
+  transition: transform 500ms ease;
+  position: relative;
+  @media all and (device-width: 768px) and (device-height: 1024px) {
+    // Fix for iPad scrollbar bug with vh units
+    height: calc(100vh - 31px);
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    right: -6.25rem;
+    width: 6.25rem;
+    height: 100%;
+  }
+  @media screen and (min-width: 64rem) {
+    transform: none;
+  }
+}
+
+.posts_active {
+  transform: none;
+}
+
+.posts__title {
+  padding: 2.5rem 0 1rem;
+  align-self: center;
+}
+
+.posts__list {
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  flex: 10;
+  transition: transform 500ms ease;
+}
+
+.posts__list_hidden {
+  transform: translateX(-200%);
+}
+
+.posts__dismiss {
+  background-color: #000;
+  border: 0;
+  padding: 1rem 0;
+  font-size: .875rem;
+  color: var(--main-text-color);
+}
+
+.posts__list-post {
+  display: flex;
+  flex-wrap: wrap;
+  margin: .625rem;
+  border-bottom: 1px solid #666;
+  transition: transform 500ms ease;
+  max-width: 18.75rem;
+}
+
+.posts__list-post_read {
+  .posts__list-author, .posts__list-title {
+    color: #666;
+  }
+}
+
+.posts__list-post_hidden {
+  transform: translateX(-200%);
+}
+
+.posts__list-time {
+  color: #666;
+}
+
+.posts__list-top {
+  display: flex;
+  align-items: baseline;
+}
+
+.posts__list-bullet {
+  background-color: #008eff;
+  border-radius: 100%;
+  width: .625rem;
+  height: .625rem;
+  margin-right: .62rem;
+  align-self: flex-start;
+  + .posts__list-author {
+    color: #fff;
+    padding-left: 0;
+  }
+}
+
+.posts__list-author {
+  margin-right: .3125rem;
+  padding-left: 1.25rem;
+}
+
+.posts__list-main {
+  display: flex;
+  align-items: center;
+  margin-top: .625rem;
+  padding-right: 1.25rem;
+  width: 100%;
+  position: relative;
+  &::after {
+    content: '\27A4';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    color: #fff;
+    transform: translateY(-50%);
+  }
+}
+
+.posts__list-image {
+  height: 6.25rem;
+}
+
+.posts__list-title {
+  padding-left: .625rem;
+}
+
+.posts__list-bottom {
+  display: flex;
+  flex-basis: 100%;
+  justify-content: space-between;
+  margin: 1.25rem 0 .3125rem;
+}
+
+.posts__list-button {
+  background-color: transparent;
+  border: 0;
+  color: #fff;
+  font-size: .875rem;
+  cursor: pointer;
+  span {
+    border-radius: 100%;
+    border: 2px solid var(--main-text-color);
+    color: var(--main-text-color);
+    display: inline-block;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+.posts__list-comments {
+  color: var(--main-text-color);
+}
+
+.active-post {
+  flex: 1 1 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin: 1.25rem;
+  img {
+    align-self: center;
+    margin: 2.5rem;
+  }
+}

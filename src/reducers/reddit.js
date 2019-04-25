@@ -4,7 +4,8 @@ const initialState = Immutable({
   posts: [],
   activePost: [],
   readPosts: [],
-  dismissedPosts: []
+  dismissedPosts: [],
+  sidebar: false
 });
 
 const reddit = (state = initialState, action) => {
@@ -27,9 +28,18 @@ const reddit = (state = initialState, action) => {
     case 'ACTIVE_POST':
       return {
         ...state,
-        activePost: action.post,
-        readPosts: [...state.readPosts, action.post.id]
+        activePost: action.post
      }
+    case 'READ_POST':
+      return {
+        ...state,
+        readPosts: [...state.readPosts, action.postId]
+      }
+    case 'TOGGLE_SIDEBAR':
+      return {
+        ...state,
+        sidebar: action.status
+      }
     default:
       return state;
   }
