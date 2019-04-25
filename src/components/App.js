@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { fetchPosts, loadActivePost, dismissPost, dismissPosts } from '../actions/index';
 import Post from './Post';
 import Moment from 'react-moment';
+import { Swipeable } from 'react-swipeable'
 
 class App extends React.Component {
   componentDidMount() {
@@ -34,28 +35,34 @@ class App extends React.Component {
     }, 1000);
   }
 
+  showSidebar = () => {
+    // Implement sidebar functionality
+  }
+
   render() {
     const { posts, activePost, readPosts } = this.props;
 
     return(
       <React.Fragment>
-        {
-          posts.map(post => {
-            return(
-              <div key={post.id} onClick={() => this.loadActivePost(post.id)}>
-                { !readPosts.includes(post.id) &&
-                  <div className="bullet"></div>
-                }
-                {post.author}
-                <Moment fromNow>{post.created * 1000}</Moment>
-                <img src={post.thumbnail} alt={post.title} />
-                {post.title}
-                <button onClick={(e) => this.dismissPost(e, post.id)}>&times; Dismiss Post</button>
-                {post.num_comments} comments
-              </div>
-            );
-          })
-        }
+        <Swipeable trackMouse onSwipedRight={this.showSidebar}>
+          {
+            posts.map(post => {
+              return(
+                <div key={post.id} onClick={() => this.loadActivePost(post.id)}>
+                  { !readPosts.includes(post.id) &&
+                    <div className="bullet"></div>
+                  }
+                  {post.author}
+                  <Moment fromNow>{post.created * 1000}</Moment>
+                  <img src={post.thumbnail} alt={post.title} />
+                  {post.title}
+                  <button onClick={(e) => this.dismissPost(e, post.id)}>&times; Dismiss Post</button>
+                  {post.num_comments} comments
+                </div>
+              );
+            })
+          }
+        </Swipeable>
         <Post post={activePost} />
         <button onClick={() => this.dismissPosts()}>Dismiss All</button>
       </React.Fragment>
