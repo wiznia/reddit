@@ -1,14 +1,14 @@
 import React from 'react';
 import '../App.scss';
 import { connect } from 'react-redux';
-import { fetchPosts, loadActivePost, dismissPost, dismissPosts, readPost, toggleSidebar } from '../actions/index';
+import * as actions from '../actions/index';
 import Post from './Post';
 import Moment from 'react-moment';
 import { Swipeable } from 'react-swipeable'
 
 class App extends React.Component {
   componentDidMount() {
-    this.props.dispatch(fetchPosts());
+    this.props.dispatch(actions.fetchPosts());
   }
 
   loadActivePost = (e, postId) => {
@@ -19,10 +19,10 @@ class App extends React.Component {
       return;
     }
     
-    this.props.dispatch(loadActivePost(activePost));
+    this.props.dispatch(actions.loadActivePost(activePost));
     if (!this.props.readPosts.includes(postId)) {
       e.currentTarget.classList.add('posts__list-post_read');
-      this.props.dispatch(readPost(activePost.id));
+      this.props.dispatch(actions.readPost(activePost.id));
     }
   }
 
@@ -31,7 +31,7 @@ class App extends React.Component {
       e.currentTarget.parentElement.parentElement.classList.add('posts__list-post_hidden');
       // Adding timeout so we can see the animation before removing from state
       setTimeout(() => {
-        this.props.dispatch(dismissPost(postId));
+        this.props.dispatch(actions.dismissPost(postId));
       }, 300);
     }
   }
@@ -39,12 +39,12 @@ class App extends React.Component {
   dismissPosts = (e) => {
     e.currentTarget.previousElementSibling.classList.add('posts__list_hidden');
     setTimeout(() => {
-      this.props.dispatch(dismissPosts());
+      this.props.dispatch(actions.dismissPosts());
     }, 300);
   }
 
   toggleSidebar = (status) => {
-    this.props.dispatch(toggleSidebar(status));
+    this.props.dispatch(actions.toggleSidebar(status));
   }
 
   render() {
