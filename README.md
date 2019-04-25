@@ -31,13 +31,19 @@ Built with [create-react-app](https://github.com/facebook/create-react-app)
 $ git clone https://reddit-wiznia.netlify.com
 ```
 
-2. Install necessary dependencies
+2. Go into the project's folder
+
+```sh
+$ cd reddit
+```
+
+3. Install necessary dependencies
 
 ```sh
 $ npm install
 ```
 
-3. Start the server
+4. Start the server
 
 ```sh
 $ npm start
